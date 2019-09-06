@@ -4,11 +4,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using CapaDatos;
 
 namespace Laboratorio
 {
     public partial class frmEmpleado : Form
     {
+        public string GetPath()
+        {
+            string path = Path.Combine(Application.StartupPath, "emplado.json");
+            return path;
+        }
         public bool Validar()
         {
             if (txtId.Text == string.Empty)
@@ -45,8 +51,8 @@ namespace Laboratorio
         {
             if (Validar())
             {
-                List<Empleado> EmpleadoList = new List<Empleado>();
-                Empleado empleado = new Empleado()
+                List<DEmpleado> EmpleadoList = new List<DEmpleado>();
+                DEmpleado empleado = new DEmpleado()
                 {
                     Id = Int32.Parse(txtId.Text),
                     Nombre = txtNombre.Text,
@@ -55,7 +61,7 @@ namespace Laboratorio
                 };
                 EmpleadoList.Add(empleado);
                 var jsonList = JsonConvert.SerializeObject(EmpleadoList);
-                string path = @"e:\empleado.json";
+                string path = GetPath();
                 File.WriteAllText(path, jsonList);
                 Limpiar();
             }
@@ -63,12 +69,12 @@ namespace Laboratorio
 
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
-            string path = @"e:\empleado.json";
+            string path = GetPath();
             using (StreamReader jsonStream = File.OpenText(path))
             {
                 var json = jsonStream.ReadToEnd();
-                List<Empleado> empleado = JsonConvert.DeserializeObject<List<Empleado>>(json);
-                Empleado empleado1 = new Empleado();
+                List<DEmpleado> empleado = JsonConvert.DeserializeObject<List<DEmpleado>>(json);
+                DEmpleado empleado1 = new DEmpleado();
                 empleado1 = empleado.First();
                 txtId.Text = empleado1.Id.ToString();
                 txtNombre.Text = empleado1.Nombre.ToString();

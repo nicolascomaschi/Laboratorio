@@ -1,6 +1,8 @@
-﻿namespace Laboratorio
+﻿using System;
+
+namespace CapaDatos
 {
-    public class Empleado
+    public class DEmpleado
     {
         private int _Id;
         private string _Nombre;
