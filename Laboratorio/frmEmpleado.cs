@@ -1,20 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Data;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
-using CapaDatos;
+using CapaNegocio;
 
 namespace Laboratorio
 {
     public partial class frmEmpleado : Form
     {
-        public string GetPath()
-        {
-            string path = Path.Combine(Application.StartupPath, "emplado.json");
-            return path;
-        }
         public bool Validar()
         {
             if (txtId.Text == string.Empty)
@@ -42,6 +35,12 @@ namespace Laboratorio
             txtId.Text = string.Empty;
             txtNombre.Text = string.Empty;
         }
+
+        //public string GetPath()
+        //{
+        //    string pathCompleto = Path.Combine(Environment.CurrentDirectory, "Empleado.json");
+        //    return pathCompleto;
+        //}
         public frmEmpleado()
         {
             InitializeComponent();
@@ -51,36 +50,14 @@ namespace Laboratorio
         {
             if (Validar())
             {
-                List<DEmpleado> EmpleadoList = new List<DEmpleado>();
-                DEmpleado empleado = new DEmpleado()
-                {
-                    Id = Int32.Parse(txtId.Text),
-                    Nombre = txtNombre.Text,
-                    DNI = Int32.Parse(txtDNI.Text),
-                    Direccion = txtDireccion.Text,
-                };
-                EmpleadoList.Add(empleado);
-                var jsonList = JsonConvert.SerializeObject(EmpleadoList);
-                string path = GetPath();
-                File.WriteAllText(path, jsonList);
+                NEmpleado.Guardar(Int32.Parse(txtId.Text), txtNombre.Text, Int32.Parse(txtDNI.Text), txtDireccion.Text);
                 Limpiar();
             }
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
-            string path = GetPath();
-            using (StreamReader jsonStream = File.OpenText(path))
-            {
-                var json = jsonStream.ReadToEnd();
-                List<DEmpleado> empleado = JsonConvert.DeserializeObject<List<DEmpleado>>(json);
-                DEmpleado empleado1 = new DEmpleado();
-                empleado1 = empleado.First();
-                txtId.Text = empleado1.Id.ToString();
-                txtNombre.Text = empleado1.Nombre.ToString();
-                txtDNI.Text = empleado1.DNI.ToString();
-                txtDireccion.Text = empleado1.Direccion;
-            }
+            this.dataListado.DataSource = NEmpleado.Actualizar();
         }
 
         private void TxtId_KeyPress(object sender, KeyPressEventArgs e)
