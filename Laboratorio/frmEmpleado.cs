@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data;
-using System.IO;
 using System.Windows.Forms;
 using CapaNegocio;
 
@@ -36,14 +34,15 @@ namespace Laboratorio
             txtNombre.Text = string.Empty;
         }
 
-        //public string GetPath()
-        //{
-        //    string pathCompleto = Path.Combine(Environment.CurrentDirectory, "Empleado.json");
-        //    return pathCompleto;
-        //}
+        public void Mostrar()
+        {
+            dataListado.DataSource = NEmpleado.Actualizar();
+        }
+
         public frmEmpleado()
         {
             InitializeComponent();
+            Mostrar();
         }
 
         private void BtnGuardar_Click(object sender, EventArgs e)
@@ -57,7 +56,7 @@ namespace Laboratorio
 
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
-            this.dataListado.DataSource = NEmpleado.Actualizar();
+            Mostrar();
         }
 
         private void TxtId_KeyPress(object sender, KeyPressEventArgs e)

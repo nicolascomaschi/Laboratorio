@@ -1,18 +1,43 @@
-﻿using System;
+﻿using Entidades;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace CapaDatos
 {
     public class DEmpleado
     {
-        private int _Id;
-        private string _Nombre;
-        private int _DNI;
-        private string _Direccion;
+        public static string GetPath()
+        {
+            string pathCompleto = Path.Combine(Environment.CurrentDirectory, "Empleado.json");
+            return pathCompleto;
+        }
+        public static void Guardar(Empleado empleado)
+        {
+            string jsonObj = JsonConvert.SerializeObject(empleado);
+            using (StreamWriter file = new StreamWriter(GetPath(), true))
+            {
+                file.WriteLine(jsonObj);
+                file.Close();
+            }
+        }
 
-        public int Id { get => _Id; set => _Id = value; }
-        public string Nombre { get => _Nombre; set => _Nombre = value; }
-        public int DNI { get => _DNI; set => _DNI = value; }
-        public string Direccion { get => _Direccion; set => _Direccion = value; }
+        public static List<Empleado> Actualizar()
+        {
+            List<Empleado> list = new List<Empleado>();
+            string line = "";
+            using (StreamReader file = new StreamReader(GetPath()))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    Empleado empleado = JsonConvert.DeserializeObject<Empleado>(line);
+                    list.Add(empleado);
+                }
+                return list;
+            }
+        }
 
     }
 }

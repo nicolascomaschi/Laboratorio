@@ -1,9 +1,7 @@
 ﻿using CapaDatos;
-using Newtonsoft.Json;
+using Entidades;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.IO;
 
 namespace CapaNegocio
@@ -17,38 +15,19 @@ namespace CapaNegocio
         }
         public static void Guardar(int id, string nombre, int dni, string direccion)
         {
-            DEmpleado empleado = new DEmpleado()
+            Empleado empleado = new Empleado()
             {
                 Id = id,
                 Nombre = nombre,
                 DNI = dni,
                 Direccion = direccion,
             };
-            //string pathCompleto = Path.Combine(path, "Empleado.json");
-            string jsonObj = JsonConvert.SerializeObject(empleado);
-            using (StreamWriter file = new StreamWriter(GetPath(), true))
-            {
-                file.Write(jsonObj);
-                file.Close();
-            }
+            DEmpleado.Guardar(empleado);
         }
 
-        public static DataTable Actualizar()
+        public static List<Empleado> Actualizar()
         {
-            List<DEmpleado> list = new List<DEmpleado>();
-            //string pathCompleto = Path.Combine(GetPath(), "Empleado.json");
-            string line = "";
-            using (StreamReader file = new StreamReader(GetPath()))
-            {
-                //while ((line = file.ReadLine()) != null)
-                //{
-                //    DEmpleado empleado = JsonConvert.DeserializeObject<DEmpleado>(line);
-                //    list.Add(empleado);
-                //}
-                line = file.ReadToEnd();
-                DataTable dTable = (DataTable)JsonConvert.DeserializeObject(line, (typeof(DataTable)));
-                return dTable;
-            }
+            return DEmpleado.Actualizar();
         }
     }
 }
