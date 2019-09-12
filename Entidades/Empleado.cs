@@ -1,5 +1,8 @@
-﻿namespace Entidades
+﻿using System;
+
+namespace Entidades
 {
+    [Serializable]
     public class Empleado
     {
         private int _Id;

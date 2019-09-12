@@ -23,7 +23,6 @@ namespace CapaDatos
                 file.Close();
             }
         }
-
         public static List<Empleado> Actualizar()
         {
             List<Empleado> list = new List<Empleado>();
@@ -39,5 +38,54 @@ namespace CapaDatos
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<Empleado> listEmp = new List<Empleado>();
+
+        public List<Empleado> GetList()
+        {
+            return listEmp;
+        }
+
+        public void AddEmpleado(Empleado empleado)
+        {
+            listEmp.Add(empleado);
+        }
+
+        public void DeleteEmpleado(Empleado empleado)
+        {
+            listEmp.Remove(empleado);
+        }
+
+        public void Save(Empleado empleado)
+        {
+            string jsonObj = JsonConvert.SerializeObject(empleado);
+            using (StreamWriter file = new StreamWriter(GetPath(), true))
+            {
+                file.WriteLine(jsonObj);
+                file.Close();
+            }
+        }
+
+        public List<Empleado> Read()
+        {
+            string line = "";
+            using (StreamReader file = new StreamReader(GetPath()))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    Empleado empleado = JsonConvert.DeserializeObject<Empleado>(line);
+                    listEmp.Add(empleado);
+                }
+                return listEmp;
+            }
+        }
+
+        public Empleado Find(int id)
+        {
+            return listEmp.Where(e => e.Id == id).FirstOrDefault();
+        }
     }
 }

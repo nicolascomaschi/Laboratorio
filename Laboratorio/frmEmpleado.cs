@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
-using CapaNegocio;
+using Entidades;
 
 namespace Laboratorio
 {
     public partial class frmEmpleado : Form
     {
+        Repositorio<Empleado> repo = new Repositorio<Empleado>();
+        private string path = string.Empty;
         public bool Validar()
         {
             if (txtId.Text == string.Empty)
@@ -34,29 +36,31 @@ namespace Laboratorio
             txtNombre.Text = string.Empty;
         }
 
-        public void Mostrar()
-        {
-            dataListado.DataSource = NEmpleado.Actualizar();
-        }
-
-        public frmEmpleado()
+        public frmEmpleado(string ruta)
         {
             InitializeComponent();
-            Mostrar();
+            path = Tools.GetPath(ruta);
         }
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
             if (Validar())
             {
-                NEmpleado.Guardar(Int32.Parse(txtId.Text), txtNombre.Text, Int32.Parse(txtDNI.Text), txtDireccion.Text);
+                Empleado emp = new Empleado()
+                {
+                    Direccion = txtDireccion.Text,
+                    Nombre = txtNombre.Text,
+                    Id = Int32.Parse(txtId.Text),
+                    DNI = Int32.Parse(txtDNI.Text),
+                };
+                repo.Save(emp, Tools.GetPath(path));
                 Limpiar();
             }
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
-            Mostrar();
+
         }
 
         private void TxtId_KeyPress(object sender, KeyPressEventArgs e)
@@ -77,6 +81,17 @@ namespace Laboratorio
                 e.Handled = true;
                 return;
             }
+        }
+
+        private void FrmEmpleado_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnListado_Click(object sender, EventArgs e)
+        {
+            frmEmpleadoListado form = new frmEmpleadoListado(path);
+            form.Show();
         }
     }
 }
