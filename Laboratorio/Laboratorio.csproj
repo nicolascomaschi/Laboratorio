@@ -69,10 +69,10 @@
     <Compile Include="frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IIdentificable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorio\Repositorio.cs" />
+    <Compile Include="Repositorio\RepositorioIdentificable.cs" />
     <Compile Include="Tools\CopiarObjs.cs" />
     <Compile Include="Tools\Tools.cs" />
     <EmbeddedResource Include="frmEmpleado.resx">

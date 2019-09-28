@@ -45,9 +45,10 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(348, 63);
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.Location = new System.Drawing.Point(332, 48);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(92, 49);
             this.btnGuardar.TabIndex = 0;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -66,7 +67,7 @@
             // 
             this.txtId.Location = new System.Drawing.Point(116, 48);
             this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(155, 20);
+            this.txtId.Size = new System.Drawing.Size(191, 20);
             this.txtId.TabIndex = 2;
             this.txtId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtId_KeyPress);
             // 
@@ -101,14 +102,14 @@
             // 
             this.txtNombre.Location = new System.Drawing.Point(116, 83);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(155, 20);
+            this.txtNombre.Size = new System.Drawing.Size(191, 20);
             this.txtNombre.TabIndex = 7;
             // 
             // txtDNI
             // 
             this.txtDNI.Location = new System.Drawing.Point(116, 116);
             this.txtDNI.Name = "txtDNI";
-            this.txtDNI.Size = new System.Drawing.Size(155, 20);
+            this.txtDNI.Size = new System.Drawing.Size(191, 20);
             this.txtDNI.TabIndex = 8;
             this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtDNI_KeyPress);
             // 
@@ -116,7 +117,7 @@
             // 
             this.txtDireccion.Location = new System.Drawing.Point(116, 148);
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(155, 20);
+            this.txtDireccion.Size = new System.Drawing.Size(191, 20);
             this.txtDireccion.TabIndex = 9;
             // 
             // empleadoBindingSource
@@ -125,9 +126,10 @@
             // 
             // btnListado
             // 
-            this.btnListado.Location = new System.Drawing.Point(348, 244);
+            this.btnListado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnListado.Location = new System.Drawing.Point(333, 119);
             this.btnListado.Name = "btnListado";
-            this.btnListado.Size = new System.Drawing.Size(75, 23);
+            this.btnListado.Size = new System.Drawing.Size(91, 49);
             this.btnListado.TabIndex = 10;
             this.btnListado.Text = "Listado";
             this.btnListado.UseVisualStyleBackColor = true;
@@ -137,7 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 301);
+            this.ClientSize = new System.Drawing.Size(470, 212);
             this.Controls.Add(this.btnListado);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.txtDireccion);
@@ -148,8 +150,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtNombre);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmEmpleado";
-            this.Text = "frmEmpleado";
+            this.Text = "Formulario de Carga";
             this.Load += new System.EventHandler(this.FrmEmpleado_Load);
             ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).EndInit();
             this.ResumeLayout(false);

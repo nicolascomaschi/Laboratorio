@@ -1,17 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using Entidades;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace Laboratorio
 {
-    public class Repositorio<T> 
+    public class Repositorio<T> where T : IEquatable<T>, ICopiable<T>
     {
-        private List<T> list = new List<T>();
+        protected List<T> list = new List<T>();
 
         public List<T> GetList()
         {
-            return list;
+            return CopiarObjs.Copiar(list);
         }
 
         public void AddEmpleado(T obj)
@@ -21,7 +23,19 @@ namespace Laboratorio
 
         public void DeleteEmpleado(T obj)
         {
-            list.Remove(obj);
+            var original = list.Find(x => x.Equals(obj));
+            if (original != null)
+            {
+                list.Remove(original);
+            }
+        }
+        public void Update(T obj)
+        {
+            var original = list.Find(x => x.Equals(obj));
+            if (original != null)
+            {
+                original.CopiarDesde(obj);
+            }
         }
 
         public void Save(T obj, string path)
@@ -31,6 +45,14 @@ namespace Laboratorio
             {
                 file.WriteLine(jsonObj);
                 file.Close();
+            }
+        }
+        public void SaveList(List<T> list, string path)
+        {
+            DataContractJsonSerializer f = new DataContractJsonSerializer(typeof(List<T>));
+            using (System.IO.Stream s = File.Open(path, FileMode.Create))
+            {
+                f.WriteObject(s, list);
             }
         }
 
@@ -48,7 +70,7 @@ namespace Laboratorio
             }
         }
 
-        public T Find(int id)
+        public virtual T Find(int id)
         {
             foreach (var item in list)
             {
@@ -56,9 +78,9 @@ namespace Laboratorio
                 IIdentificable obj = item as IIdentificable;
                 if (obj != null)
                 {
-                    if (obj.id != id)
+                    if (obj.Id != id)
                     {
-                        return item;
+                        CopiarObjs.Copiar(item);
                     }
                 }
             }

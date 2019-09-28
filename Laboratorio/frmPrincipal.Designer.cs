@@ -45,7 +45,7 @@
             this.dataArchivos.Location = new System.Drawing.Point(12, 110);
             this.dataArchivos.Name = "dataArchivos";
             this.dataArchivos.ReadOnly = true;
-            this.dataArchivos.Size = new System.Drawing.Size(432, 173);
+            this.dataArchivos.Size = new System.Drawing.Size(402, 173);
             this.dataArchivos.TabIndex = 0;
             this.dataArchivos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataArchivos_CellContentClick);
             // 
@@ -61,32 +61,36 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(189, 67);
+            this.textBox1.Location = new System.Drawing.Point(75, 73);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(174, 20);
+            this.textBox1.Size = new System.Drawing.Size(249, 20);
             this.textBox1.TabIndex = 3;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(369, 67);
+            this.btnAgregar.BackColor = System.Drawing.SystemColors.Control;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.ForeColor = System.Drawing.Color.Black;
+            this.btnAgregar.Location = new System.Drawing.Point(330, 60);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(84, 44);
             this.btnAgregar.TabIndex = 4;
             this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 295);
+            this.ClientSize = new System.Drawing.Size(426, 295);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataArchivos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "frmPrincipal";
-            this.Text = "frmPrincipal";
+            this.Text = "Formulario Principal";
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataArchivos)).EndInit();
             this.ResumeLayout(false);

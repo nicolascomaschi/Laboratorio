@@ -18,7 +18,7 @@ namespace Laboratorio
 
         public void CargarGrid()
         {
-            List<string> lista = obtenerArchivosDirectorio("E:\\Datos\\*.json");
+            List<string> lista = obtenerArchivosDirectorio(Tools.pathDefault + "*.json");
             DataTable dt = new DataTable("Archivos");
             dt.Columns.Add(new DataColumn("Archivo", typeof(string)));
             for (int i = 0; i < lista.Count; i++)
@@ -48,10 +48,17 @@ namespace Laboratorio
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
-            string path = @"E:\\Datos\\"+this.textBox1.Text+".json";
-            File.WriteAllText(path, "");
-            this.textBox1.Text = string.Empty;
-            CargarGrid();
+            if (this.textBox1.Text != string.Empty)
+            {
+                string path = Tools.pathDefault + this.textBox1.Text + ".json";
+                File.WriteAllText(path, "");
+                this.textBox1.Text = string.Empty;
+                CargarGrid();
+            }
+            else
+            {
+                MessageBox.Show("Por favor ingrese un nombre para su archivo nuevo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

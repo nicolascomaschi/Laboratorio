@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Entidades;
 
@@ -8,6 +9,7 @@ namespace Laboratorio
     {
         Repositorio<Empleado> repo = new Repositorio<Empleado>();
         private string path = string.Empty;
+        private List<Empleado> list = new List<Empleado>();
         public bool Validar()
         {
             if (txtId.Text == string.Empty)
@@ -40,6 +42,7 @@ namespace Laboratorio
         {
             InitializeComponent();
             path = Tools.GetPath(ruta);
+            list = repo.Read(path);
         }
 
         private void BtnGuardar_Click(object sender, EventArgs e)
@@ -51,9 +54,9 @@ namespace Laboratorio
                     Direccion = txtDireccion.Text,
                     Nombre = txtNombre.Text,
                     Id = Int32.Parse(txtId.Text),
-                    DNI = Int32.Parse(txtDNI.Text),
+                    Dni = Int32.Parse(txtDNI.Text),
                 };
-                repo.Save(emp, Tools.GetPath(path));
+                repo.Save(emp, path);
                 Limpiar();
             }
         }
@@ -90,7 +93,8 @@ namespace Laboratorio
 
         private void BtnListado_Click(object sender, EventArgs e)
         {
-            frmEmpleadoListado form = new frmEmpleadoListado(path);
+            list = repo.Read(path);
+            frmEmpleadoListado form = new frmEmpleadoListado(path, list);
             form.Show();
         }
     }
